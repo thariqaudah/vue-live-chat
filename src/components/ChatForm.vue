@@ -7,6 +7,7 @@
       placeholder="Type a message..."
       v-model="message"
     ></textarea>
+    <div v-if="error" class="error">{{ error }}</div>
   </form>
 </template>
 
@@ -14,25 +15,29 @@
 import { ref } from 'vue';
 import getUser from '../composables/getUser';
 import { timestamp } from '../firebase/config';
+import useCollection from '../composables/useCollection';
 
 export default {
   name: 'ChatForm',
   setup() {
     const message = ref('');
     const user = getUser();
+    const { error, addDoc } = useCollection('messages'); 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       const chat = {
         name: user.value.displayName,
         message: message.value,
         createdAt: timestamp(),
       };
 
-      console.log(chat);
-      message.value = '';
+      await addDoc(chat);
+      if(!error.value) {
+        message.value = '';
+      }
     };
 
-    return { message, handleSubmit };
+    return { message, error, handleSubmit };
   },
 };
 </script>
@@ -41,15 +46,15 @@ export default {
 textarea {
   display: block;
   width: 100%;
-  height: 50px;
+  height: 70px;
   max-height: 100%;
-  border: 1px solid #e0e0e0;
-  border-radius: 40px;
+  border: 0;
+  border-top: 1px solid #eee;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
-  line-height: 30px;
-  padding: 5px 20px;
+  line-height: 40px;
+  padding: 10px 20px;
   box-sizing: border-box;
 }
 </style>

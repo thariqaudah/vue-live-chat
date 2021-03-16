@@ -34,7 +34,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #eee;
 }
 nav p:last-child {
   font-size: 14px;
