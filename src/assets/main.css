@@ -1,0 +1,37 @@
+body {
+  background: #eee;
+  color: #444;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  max-width: 960px;
+  background: #fff;
+  border-radius: 5px;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  display: block;
+  outline: none;
+  border: 1px solid #eee;
+  background: #00acc1;
+  color: #eee;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.error {
+  font-size: 14px;
+  color: #ec407a;
+}
