@@ -22,7 +22,7 @@ export default {
   setup() {
     const message = ref('');
     const user = getUser();
-    const { error, addDoc } = useCollection('messages'); 
+    const { error, addDoc } = useCollection('messages');
 
     const handleSubmit = async () => {
       const chat = {
@@ -32,7 +32,7 @@ export default {
       };
 
       await addDoc(chat);
-      if(!error.value) {
+      if (!error.value) {
         message.value = '';
       }
     };
@@ -51,7 +51,7 @@ textarea {
   border: 0;
   border-top: 1px solid #eee;
   outline: none;
-  font-size: 16px;
+  font-size: 14px;
   font-family: inherit;
   line-height: 40px;
   padding: 10px 20px;

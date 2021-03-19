@@ -5,7 +5,7 @@ import getUser from '../composables/getUser';
 
 // Nav guards
 const requireAuth = (to, from, next) => {
-  console.log(to, from, next);
+  // console.log(to, from, next);
   const user = getUser();
   if (user.value) {
     next();
@@ -15,7 +15,7 @@ const requireAuth = (to, from, next) => {
 };
 
 const requireGuest = (to, from, next) => {
-  console.log(to, from, next);
+  // console.log(to, from, next);
   const user = getUser();
   if (user.value) {
     next({ name: 'ChatRoom' });

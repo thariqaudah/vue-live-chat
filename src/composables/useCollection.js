@@ -6,17 +6,15 @@ const useCollection = (collection) => {
 
   const addDoc = async (doc) => {
     error.value = null;
-    console.log(doc)
     try {
-      const res = await db.collection(collection).add(doc);
-      console.log(res);
+      await db.collection(collection).add(doc);
     } catch (err) {
       console.log(err);
-      error.value = 'Could not send message'
+      error.value = 'Could not send message';
     }
-  }
+  };
 
-  return { error, addDoc }
+  return { error, addDoc };
 };
 
 export default useCollection;

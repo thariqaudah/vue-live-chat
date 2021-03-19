@@ -15,6 +15,7 @@
       v-model="password"
       placeholder="Password..."
     />
+    <div v-if="isLoading">Loading...</div>
     <button>Sign up</button>
   </form>
 </template>
@@ -30,6 +31,7 @@ export default {
     const displayName = ref(null);
     const email = ref(null);
     const password = ref(null);
+    const isLoading = ref(false);
 
     // Composables
     const { signup, error } = useSignup();
@@ -39,14 +41,16 @@ export default {
       if (!displayName.value || !email.value || !password.value) {
         error.value = 'All fields are required';
       } else {
+        isLoading.value = true;
         await signup(email.value, password.value, displayName.value);
+        isLoading.value = false;
         if (!error.value) {
           context.emit('onSignup');
         }
       }
     };
 
-    return { displayName, email, password, handleSubmit, error };
+    return { displayName, email, password, handleSubmit, error, isLoading };
   },
 };
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div class="container chat-room">
     <Navbar />
+    <ChatWindow />
     <ChatForm />
   </div>
 </template>
@@ -9,12 +10,13 @@
 import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 import Navbar from '../components/Navbar.vue';
+import ChatWindow from '../components/ChatWindow.vue';
 import ChatForm from '../components/ChatForm.vue';
 import getUser from '../composables/getUser';
 
 export default {
   name: 'ChatRoom',
-  components: { Navbar, ChatForm },
+  components: { Navbar, ChatWindow, ChatForm },
   setup() {
     const user = getUser();
     const router = useRouter();
@@ -29,7 +31,8 @@ export default {
 </script>
 
 <style scoped>
-  .chat-room {
-    padding: 0;
-  }
+.chat-room {
+  padding: 0;
+  overflow: hidden;
+}
 </style>

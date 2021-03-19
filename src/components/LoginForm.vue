@@ -9,6 +9,7 @@
       v-model="password"
       placeholder="Password..."
     />
+    <div v-if="isLoading">Loading...</div>
     <button>Log in</button>
   </form>
 </template>
@@ -16,9 +17,11 @@
 <script>
 import { ref } from 'vue';
 import useLogin from '../composables/useLogin';
+import loadable from '../mixins/loadable';
 
 export default {
   name: 'LoginForm',
+  mixins: [loadable],
   setup(props, context) {
     // Refs
     const email = ref(null);
@@ -32,14 +35,16 @@ export default {
       if (!email.value || !password.value) {
         error.value = 'All fields are required';
       } else {
+        loadingStatus(true);
         await login(email.value, password.value);
+        loadingStatus(false);
         if (!error.value) {
           context.emit('onLogin');
         }
       }
     };
 
-    return { email, password, handleSubmit, error };
+    return { email, password, handleSubmit, error, isLoading };
   },
 };
 </script>
